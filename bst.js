@@ -59,6 +59,22 @@ class BinarySearchTree {
 
     };
 
+    searchNode(value) {
+
+        // create search node function
+        const searchNode = currentNode => {
+            // simple. no node, no value
+            if (!currentNode) return false;
+            // if value is smaller, then search on the left and return the value
+            if (value < currentNode.value) return searchNode(currentNode.left);
+            // if value is larger, the search on the right and return the value
+            if (value > currentNode.value) return searchNode(currentNode.right);
+            return true;
+        };
+
+        return searchNode(this.root);
+    };
+
 
     // this is optional and good for debugging as nicely outputting the result on the console
     toString() {
@@ -71,9 +87,12 @@ const tree = new BinarySearchTree();
 tree.addNode(2);
 tree.addNode(5);
 tree.addNode(11);
-tree.addNode(7);
+tree.addNode(77);
 tree.addNode(88);
-tree.addNode(69);
+tree.addNode(3);
+tree.searchNode(99); // false
+tree.searchNode(3); // true
+tree.searchNode(11); // true
 
 // consolelog to see what you've created
-console.log(tree.toString())
+// console.log(tree.toString())
