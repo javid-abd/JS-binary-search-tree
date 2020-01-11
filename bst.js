@@ -76,6 +76,35 @@ class BinarySearchTree {
     };
 
 
+    removeNode(value) {
+
+        const removeNode = function (currentNode, value) {
+            // if the tree is null, then exit that's all you can do
+            if (!currentNode) return null;
+            // Determine which node to traverse
+            if (value < currentNode.value) {
+                currentNode.left = removeNode(currentNode.left, value);
+            } else if (value > currentNode.value) {
+                currentNode.right = removeNode(currentNode.right, value);
+            } else {
+                if (currentNode.left === null && currentNode.right === null) return null;
+                if (currentNode.left === null) return currentNode.right;
+                if (currentNode.right === null) return currentNode.left;
+                let replacement = currentNode.left;
+                let replacementParent = currentNode;
+                // Find the replacement
+                while (replacementParent.right !== null) {
+                    replacementParent = replacement;
+                    replacement = replacement.right;
+                }
+                currentNode.value = replacementParent.value;
+                currentNode.left = removeNode(currentNode.left, replacementParent.value);
+            }
+            return currentNode;
+        };
+        this.root = removeNode(this.root, value);
+    };
+
     // this is optional and good for debugging as nicely outputting the result on the console
     toString() {
         return JSON.stringify(this.root);
@@ -94,5 +123,8 @@ tree.searchNode(99); // false
 tree.searchNode(3); // true
 tree.searchNode(11); // true
 
+tree.removeNode(5);
+tree.removeNode(10);
+
 // consolelog to see what you've created
-// console.log(tree.toString())
+console.log(tree.toString())
