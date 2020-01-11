@@ -7,3 +7,5 @@
 * Search
 
 ### more coming..
+
+## If you have hard time to grasp how binary tree works, visit this awesome [binary search tree visualization](https://www.cs.usfca.edu/~galles/visualization/BST.html)
